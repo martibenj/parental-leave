@@ -1,0 +1,21 @@
+{
+  "name": "parental-leave",
+  "version": "1.0.0",
+  "description": "Update Parental Leave planning according to birthDate and remaining vacations",
+  "main": "dist/main.js",
+  "scripts": {
+    "build": "tsc",
+    "format": "prettier --write 'src/**/*.ts'",
+    "start": "npm run build && node dist/main.js",
+    "test": "jest"
+  },
+  "author": "martibenj",
+  "license": "Apache",
+  "devDependencies": {
+    "@types/jest": "29.5.13",
+    "jest": "29.7.0",
+    "prettier": "3.3.3",
+    "ts-jest": "29.2.5",
+    "typescript": "5.6.3"
+  }
+}
