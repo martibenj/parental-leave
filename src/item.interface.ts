@@ -1,7 +1,11 @@
-export interface Item {
+export interface RawItem {
   type: string;
   days: number;
-  isBusinessDays: boolean;
+  isBusinessDay?: boolean;
+}
+
+export interface Item extends RawItem {
   startDate: Date;
   endDate: Date;
+  isBusinessDay: boolean;
 }

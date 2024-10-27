@@ -7,8 +7,8 @@ const BANK_DAYS = [
   new Date('2024-11-11'),
 ];
 
-export const addDays = (date: Date, days: number, isBusinessDays: boolean = false): Date => {
-  if (isBusinessDays) {
+export const addDays = (date: Date, days: number, isBusinessDay: boolean = false): Date => {
+  if (isBusinessDay) {
     return addBusinessDays(date, days);
   } else {
     return addCalendarDays(date, days);

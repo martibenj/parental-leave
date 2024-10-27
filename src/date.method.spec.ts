@@ -23,13 +23,13 @@ describe('addBusinessDays', () => {
 });
 
 describe('addDays', () => {
-  it('should add calendar days when isBusinessDays is false', () => {
+  it('should add calendar days when isBusinessDay is false', () => {
     const date = new Date('2024-10-09');
     const result = addDays(date, 7, false);
     expect(result.toISOString()).toBe(new Date('2024-10-16').toISOString());
   });
 
-  it('should add business days when isBusinessDays is true', () => {
+  it('should add business days when isBusinessDay is true', () => {
     const date = new Date('2024-10-09');
     const result = addDays(date, 5, true);
     expect(result.toISOString()).toBe(new Date('2024-10-16').toISOString());
