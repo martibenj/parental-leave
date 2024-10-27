@@ -1,17 +1,12 @@
 import { Item } from './item.interface';
+import { MAIN_PLANNING } from './main';
 import { ParentalLeave } from './parental.leave';
 
 describe('ParentalLeave.generateVacationSchedule', () => {
   it('should generate the correct vacation schedule for the provided parameters', () => {
     const birthDate = new Date('2024-10-10');
-    const vacationDays = 11;
-    const nbDaysParentalLeaveFirstSplit = 12;
 
-    const schedule: Item[] = ParentalLeave.generateVacationSchedule(
-      birthDate,
-      vacationDays,
-      nbDaysParentalLeaveFirstSplit
-    );
+    const schedule: Item[] = ParentalLeave.generateVacationSchedule(birthDate, MAIN_PLANNING);
 
     // - Birth Leave FR: 10/10/2024 - 14/10/2024 (3 business days)
     // - Mandatory Parental Leave FR: 15/10/2024 - 18/10/2024 (4 calendar days)
@@ -25,51 +20,58 @@ describe('ParentalLeave.generateVacationSchedule', () => {
       {
         type: 'Birth Leave FR',
         days: 3,
-        isBusinessDays: true,
+        isBusinessDay: true,
         startDate: new Date('2024-10-10'),
         endDate: new Date('2024-10-14'),
       },
       {
         type: 'Mandatory Parental Leave FR',
         days: 4,
-        isBusinessDays: false,
+        isBusinessDay: false,
         startDate: new Date('2024-10-15'),
         endDate: new Date('2024-10-18'),
       },
       {
         type: 'Parental Leave FR',
         days: 12,
-        isBusinessDays: false,
+        isBusinessDay: false,
         startDate: new Date('2024-10-19'),
         endDate: new Date('2024-10-30'),
       },
       {
         type: 'Back to work',
         days: 21,
-        isBusinessDays: false,
+        isBusinessDay: false,
         startDate: new Date('2024-10-31'),
         endDate: new Date('2024-11-20'),
       },
       {
         type: 'Vacations',
         days: 11,
-        isBusinessDays: true,
+        isBusinessDay: true,
         startDate: new Date('2024-11-21'),
         endDate: new Date('2024-12-05'),
       },
       {
         type: 'Parental Leave FR',
         days: 9,
-        isBusinessDays: false,
+        isBusinessDay: false,
         startDate: new Date('2024-12-06'),
         endDate: new Date('2024-12-14'),
       },
       {
         type: "General Parental Leave Moody's",
-        days: 51,
-        isBusinessDays: false,
+        days: 39,
+        isBusinessDay: false,
         startDate: new Date('2024-12-15'),
-        endDate: new Date('2025-02-03'),
+        endDate: new Date('2025-01-22'),
+      },
+      {
+        type: 'Back to work',
+        days: 1,
+        isBusinessDay: true,
+        startDate: new Date('2025-01-23'),
+        endDate: new Date('2025-01-23'),
       },
     ]);
   });
