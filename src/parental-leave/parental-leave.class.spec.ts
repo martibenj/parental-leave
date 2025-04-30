@@ -1,6 +1,6 @@
-import { Item } from './item.interface';
-import { MAIN_PLANNING } from './main';
-import { ParentalLeave } from './parental.leave';
+import { Item } from '../interfaces/item.interface';
+import { MAIN_PLANNING } from '../main';
+import { ParentalLeave } from './parental-leave';
 
 describe('ParentalLeave.generateVacationSchedule', () => {
   it('should generate the correct vacation schedule for the provided parameters', () => {
@@ -14,9 +14,9 @@ describe('ParentalLeave.generateVacationSchedule', () => {
     // - Back to work: 31/10/2024 - 19/11/2024 (20 calendar days)
     // - Vacations: 20/11/2024 - 04/12/2024 (11 business days)
     // - Parental Leave FR: 05/12/2024 - 13/12/2024 (9 calendar days)
-    // - General Parental Leave Moody's: 14/12/2024 - 21/01/2025 (39 calendar days)
+    // - Global parental Leave Moody's: 14/12/2024 - 21/01/2025 (39 calendar days)
     // - Back to work: 22/01/2025 - 22/01/2025 (1 business days)
-    // - General Parental Leave Moody's: 31/07/2025 - 13/09/2025 (45 calendar days)
+    // - Global parental Leave Moody's: 28/07/2025 - 10/09/2025 (45 calendar days)
 
     expect(schedule).toEqual([
       {
@@ -62,7 +62,7 @@ describe('ParentalLeave.generateVacationSchedule', () => {
         endDate: new Date('2024-12-13'),
       },
       {
-        type: "General Parental Leave Moody's",
+        type: "Global parental Leave Moody's",
         days: 39,
         isBusinessDay: false,
         startDate: new Date('2024-12-14'),

@@ -1,4 +1,4 @@
-import { Item } from './item.interface';
+import { Item } from '../interfaces/item.interface';
 import { Message } from './message.class';
 
 describe('Message', () => {
@@ -23,8 +23,8 @@ describe('Message', () => {
 
       const result = Message.generateScheduleMessage(schedule);
       const expectedMessage =
-        `- Birth Leave: 09/10/2024 - 11/10/2024 (3 business days)\n` +
-        `- Parental Leave: 12/10/2024 - 21/10/2024 (10 calendar days)`;
+        `- Birth Leave: Oct 09, 2024 - Oct 11, 2024 (3 business days)\n` +
+        `- Parental Leave: Oct 12, 2024 - Oct 21, 2024 (10 calendar days)`;
 
       expect(result).toBe(expectedMessage);
     });
@@ -41,7 +41,7 @@ describe('Message', () => {
       ];
 
       const result = Message.generateScheduleMessage(schedule);
-      const expectedMessage = `- Back to Work: 03/02/2025 - 03/02/2025 (1 business days)`;
+      const expectedMessage = `- Back to Work: Feb 03, 2025 - Feb 03, 2025 (1 business days)`;
 
       expect(result).toBe(expectedMessage);
     });

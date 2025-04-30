@@ -1,5 +1,5 @@
-import { addDays } from './date.method';
-import { Item, RawItem } from './item.interface';
+import { Item, RawItem } from '../interfaces/item.interface';
+import { addDays } from '../utils/date.method';
 
 export class ParentalLeave {
   static generateVacationSchedule(birthDate: Date, planning: RawItem[]): Item[] {

@@ -1,38 +1,40 @@
-import { RawItem } from './item.interface';
-import { Message } from './message.class';
-import { ParentalLeave } from './parental.leave';
+import {
+  AVAILABLE_VACATION_TOTAL_COUNT,
+  NB_DAYS_USED_ON_FR_PARENTAL_LEAVE_FIRST_SPLIT,
+  NB_DAYS_BACK_TO_WORK_BETWEEN_FR_PARENTAL_LEAVE,
+  NB_DAYS_USED_ON_MOODYS_PARENTAL_LEAVE_FIRST_SPLIT,
+  MOODYS_PARENTAL_LEAVE_SECOND_SPLIT_START_DATE,
+  ESTIMATED_BIRTH_DATE,
+} from './configuration';
+import { RawItem } from './interfaces/item.interface';
+import { Message } from './message/message.class';
+import { ParentalLeave } from './parental-leave/parental-leave';
 
-const BIRTH_DATE = new Date('2024-10-10');
-const REMAINING_START_DATE = new Date('2025-07-31');
-
-const STORED_VACATION_FOR_2025 = 5;
-const TOTAL_VACATION = 16;
-const AVAILABLE_VACATIONS = TOTAL_VACATION - STORED_VACATION_FOR_2025;
-
-const TOTAL_PARENTAL_LEAVE_FR = 25;
-const TOTAL_PARENTAL_LEAVE_MOODYS = 84;
-const AFTER_BIRTH_PARENTAL_LEAVE = 4;
-
-const NB_DAYS_PARENTAL_LEAVE_FIRST_SPLIT = 12;
-const NB_DAYS_PARENTAL_LEAVE_MOODYS_FIRST_SPLIT = 39;
+// Constants
+const TOTAL_FR_PARENTAL_LEAVE = 25;
+const TOTAL_MOODYS_PARENTAL_LEAVE = 84;
+const MANDATORY_BIRTH_PARENTAL_LEAVE = 3;
+const MANDATORY_AFTER_BIRTH_PARENTAL_LEAVE = 4;
+const STORED_VACATION_FOR_NEXT_YEAR = 5;
+const AVAILABLE_VACATIONS = AVAILABLE_VACATION_TOTAL_COUNT - STORED_VACATION_FOR_NEXT_YEAR;
 
 export const MAIN_PLANNING: RawItem[] = [
   {
     type: 'Birth Leave FR',
-    days: 3,
+    days: MANDATORY_BIRTH_PARENTAL_LEAVE,
     isBusinessDay: true,
   },
   {
     type: 'Mandatory Parental Leave FR',
-    days: AFTER_BIRTH_PARENTAL_LEAVE,
+    days: MANDATORY_AFTER_BIRTH_PARENTAL_LEAVE,
   },
   {
     type: 'Parental Leave FR',
-    days: NB_DAYS_PARENTAL_LEAVE_FIRST_SPLIT,
+    days: NB_DAYS_USED_ON_FR_PARENTAL_LEAVE_FIRST_SPLIT,
   },
   {
     type: 'Back to work',
-    days: 20,
+    days: NB_DAYS_BACK_TO_WORK_BETWEEN_FR_PARENTAL_LEAVE,
   },
   {
     type: 'Vacations',
@@ -41,11 +43,12 @@ export const MAIN_PLANNING: RawItem[] = [
   },
   {
     type: 'Parental Leave FR',
-    days: TOTAL_PARENTAL_LEAVE_FR - AFTER_BIRTH_PARENTAL_LEAVE - NB_DAYS_PARENTAL_LEAVE_FIRST_SPLIT,
+    days:
+      TOTAL_FR_PARENTAL_LEAVE - MANDATORY_AFTER_BIRTH_PARENTAL_LEAVE - NB_DAYS_USED_ON_FR_PARENTAL_LEAVE_FIRST_SPLIT,
   },
   {
-    type: "General Parental Leave Moody's",
-    days: NB_DAYS_PARENTAL_LEAVE_MOODYS_FIRST_SPLIT,
+    type: "Global parental Leave Moody's",
+    days: NB_DAYS_USED_ON_MOODYS_PARENTAL_LEAVE_FIRST_SPLIT,
   },
   {
     type: 'Back to work',
@@ -56,14 +59,17 @@ export const MAIN_PLANNING: RawItem[] = [
 
 export const REMAINING_PLANNING: RawItem[] = [
   {
-    type: "General Parental Leave Moody's",
-    days: TOTAL_PARENTAL_LEAVE_MOODYS - NB_DAYS_PARENTAL_LEAVE_MOODYS_FIRST_SPLIT,
+    type: "Global parental Leave Moody's",
+    days: TOTAL_MOODYS_PARENTAL_LEAVE - NB_DAYS_USED_ON_MOODYS_PARENTAL_LEAVE_FIRST_SPLIT,
   },
 ];
 
 const main = () => {
-  const mainSchedule = ParentalLeave.generateVacationSchedule(BIRTH_DATE, MAIN_PLANNING);
-  const remainingSchedule = ParentalLeave.generateVacationSchedule(REMAINING_START_DATE, REMAINING_PLANNING);
+  const mainSchedule = ParentalLeave.generateVacationSchedule(ESTIMATED_BIRTH_DATE, MAIN_PLANNING);
+  const remainingSchedule = ParentalLeave.generateVacationSchedule(
+    MOODYS_PARENTAL_LEAVE_SECOND_SPLIT_START_DATE,
+    REMAINING_PLANNING
+  );
 
   console.log(Message.generateScheduleMessage(mainSchedule));
   console.log(Message.generateScheduleMessage(remainingSchedule));
