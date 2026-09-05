@@ -1,19 +1,44 @@
 # parental-leave
 
-Update Parental Leave planning according to the estimated Birth date and remaining vacations
+Update Parental Leave planning according to the estimated birth date and remaining vacations.
+
+## What it does
+
+Given a birth date and the number of remaining vacation days, this tool generates a parental leave planning/schedule.
+
+## Requirements
+
+- Node.js
+- npm
+
+## Setup
+
+```bash
+npm install
+```
 
 ## Configuration
-Fill your own configuration for parental leave starting date / split / etc in `src/configuration.ts`
+
+Fill in your own configuration for parental leave starting date, split, etc. in `src/configuration.ts`.
 
 ## Usage
-Generate the parental leave planning with the following command:
+
+Generate the parental leave planning with:
+
 ```bash
 npm run start
 ```
 
-## Dev
+## Development
+
+### Format
+
+```bash
+npm run format
+```
+
 ### Tests
-Run the tests with the following command:
+
 ```bash
 npm run test
 ```
